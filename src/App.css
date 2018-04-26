@@ -1,0 +1,95 @@
+.App{
+    height: 100vh;
+    background: radial-gradient(white 50%, #dedede);
+}
+
+.twitter{
+    color: red; 
+}
+
+.instagram{
+    color: purple; 
+}
+
+.header{
+    border-top: 2px #e1e1e1 solid;
+    border-left: 2px #e1e1e1 solid;
+    border-right: 2px #e1e1e1 solid;
+    background-color: #fce38a;
+}
+
+.main-container{
+    min-height: 80vh;
+    border-bottom: 2px #e1e1e1 solid;
+    border-left: 2px #e1e1e1 solid;
+    border-right: 2px #e1e1e1 solid;
+    /* background-color:  */
+}
+
+.left-side{
+    background-color: #95e1d3;
+    height: 80vh !important;
+}
+
+.right-side{
+    height: 80vh;
+    background-color: white;
+    overflow: auto;
+}
+
+input, button{
+    margin-top: 10px !important;
+    border-radius: 0 !important;
+}
+
+
+input[type='text']{
+    background-color: #eaffd0;
+    border: none;
+    border-bottom: #fce38a 4px solid;
+}
+
+input:focus[type='text']{
+    box-shadow: none;
+}
+
+.lyrics{
+    white-space: pre-line;
+}
+
+@media screen and (max-width: 576px ){
+    .main-container{
+        border-bottom: 0px;
+    }
+    
+    .left-side{
+        background-color: #95e1d3;
+        height: auto !important;
+        padding-bottom: 2em;
+        
+    }
+
+    .right-side{
+        background-color: white;
+        height: auto !important;
+        overflow: auto;
+    }
+}
+
+.history{
+    background-color: #fff9;
+    cursor: pointer;
+    /* color: white; */
+}
+
+.history .artist{
+    color: grey;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.history .song{
+    color: #218a83;
+    font-weight: bold;
+    text-transform:capitalize;
+}
