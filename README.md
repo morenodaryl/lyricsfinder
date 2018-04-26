@@ -5,4 +5,4 @@ Here is a screen of how the application look like:
 
 ![screen](/public/screen.png "Screen of the application")
 
-This application was made with React, Redux and Bootstrap. [CLICK HERE TO SEE IT.](morenodaryl.github.io/lyricsfinder)
+This application was made with React, Redux and Bootstrap. [CLICK HERE TO SEE IT.](https://morenodaryl.github.io/lyricsfinder)
