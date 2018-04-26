@@ -1,17 +1,18 @@
 const initialState = {
     artist: '',
     song: '',
+    local: false,
     history: []
 }
 
 const mainReducer = (state = initialState, action) => {
     switch (action.type) {
         case "SET_SONG":
-            const {artist, song, lyrics} = action.payload;
-            let historyToPush = [{ artist, song, lyrics }];
+            var { artist, song, lyrics } = action.payload;
+            let historyToPush = [{ artist, song, lyrics: action.payload.lyrics }];
             if(state.history.length > 0){
-                const {history} = state; 
-                const first = history[0]
+                let {history} = state; 
+                let first = history[0]
                 if (first.artist === artist && first.song === song){
                     historyToPush = []
                 }
@@ -23,9 +24,28 @@ const mainReducer = (state = initialState, action) => {
                 lyrics,
                 found: true,
                 searching: false,
+                local: false,
                 history: [
-                    ...historyToPush, 
-                    ...state.history.slice(0,4)
+                    ...historyToPush.concat(...state.history).slice(0, 5)
+                ]
+            }
+            break;
+        case 'SET_LOCAL_SONG':
+            var { artist: a, song: s, lyrics: l, index } = action.payload;
+            let { history } = state;
+            let obj = history[index];
+            const h3 = history.slice(0, index).concat(history.slice(index + 1));
+            state = {
+                ...state,
+                artist: a,
+                song: s,
+                lyrics: l,
+                found: true,
+                searching: false,
+                local: true,
+                history: [
+                    obj,
+                    ...h3
                 ]
             }
             break;
@@ -33,13 +53,15 @@ const mainReducer = (state = initialState, action) => {
             state = {
                 ...state,
                 found: false,
-                searching: false
+                searching: false,
+                local: false
             }
             break;
         case 'SEARCHING':
             state = {
                 ...state,
-                searching: true
+                searching: true,
+                local: false
             }
             break;
         case 'REORDER_HISTORY':

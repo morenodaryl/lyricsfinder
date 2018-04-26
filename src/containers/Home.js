@@ -10,13 +10,15 @@ class Home extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        this.searchTheSong();
+        if (prevProps.match.url !== this.props.match.url){
+            this.searchTheSong();
+        }
     }
 
     searchTheSong(){
         const { match } = this.props;
         if (match != null && match.params.artist != null && match.params.song != null) {
-            this.props.searchSong(match.params.artist, match.params.song);
+            this.props.searchSong(match.params.artist, match.params.song, this.props.main.local);
         } else {
             this.props.reset();
         }
@@ -31,6 +33,12 @@ class Home extends Component {
     }
 } 
 
+const mapStateToProps = (state) => {
+    return{
+        main: state.main
+    }
+}
+
 const mapDispatchToProps = (distpatch) => {
     return {
         searchSong: (artist, song) => {
@@ -42,4 +50,4 @@ const mapDispatchToProps = (distpatch) => {
     }
 }
 
-export default connect(null,mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

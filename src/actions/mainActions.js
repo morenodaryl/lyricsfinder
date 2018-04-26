@@ -1,19 +1,18 @@
 import axios from 'axios';
 
-export function searchSong(artist, song) {
+export function searchSong(artist, song, local = false) {
     return (dispatch) => {
         dispatch({
             type: 'SEARCHING'
         });
-        axios.get('https://api.lyrics.ovh/v1/'+artist+'/'+song)
-        .then((res) => {
+        const url = 'https://api.lyrics.ovh/v1/' + artist + '/' + song;
+        axios.get(url).then((res) => {
             dispatch({
                 type: 'SET_SONG',
                 payload: { artist, song, lyrics: res.data.lyrics }
             });
             document.title = `${song.toUpperCase()} - ${artist.toUpperCase()}`;
-        })
-        .catch((er) => {
+        }).catch((er) => {
             dispatch({
                 type: 'SET_NOT_FOUND'
             });
@@ -33,5 +32,15 @@ export function reset() {
     document.title = 'LYRICS FINDER';
     return {
         type: 'RESET'
+    }
+}
+
+export function setLocalSong(artist, song, lyrics, index) {
+    document.title = `${song.toUpperCase()} - ${artist.toUpperCase()}`;
+    return {
+        type: 'SET_LOCAL_SONG',
+        payload: {
+            artist, song, lyrics, index
+        }
     }
 }
